@@ -1,0 +1,32 @@
+// Example:
+
+// Input:[3 1 2 5 3] 
+
+// Output:[3, 4] 
+
+function findMissingAndDuplicateBrute(arr) {
+    arr.sort((a, b) => a - b);
+
+    let duplicate = -1;
+    let missing = -1;
+
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] === arr[i - 1]) {
+            duplicate = arr[i];
+        } else if (arr[i] - arr[i - 1] > 1) {
+            missing = arr[i - 1] + 1;
+        }
+    }
+
+    // Check edge case: missing could be n
+    if (missing === -1) {
+        missing = arr.length;
+    }
+
+    return [duplicate, missing];
+}
+
+console.log(findMissingAndDuplicateBrute([3, 1, 2, 5, 3])); // [3, 4]
+
+// ✅ Time: O(n log n)
+// ✅ Space: O(1)
