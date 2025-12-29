@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <script>
+    class List {
+      constructor(data) {
+        this.head = {
+          value: data,
+          next: null,
+        };
+        this.tail = this.head;
+        this.size = 1;
+      }
+      addNode(data) {
+        let newNode = {
+          value: data,
+          next: null,
+        };
+        this.tail.next = newNode;
+        this.tail = newNode;
+        this.size++;
+      }
+
+      traverse() {
+        let currnode = this.head;
+        while (currnode) {
+          console.log(currnode);
+          currnode = currnode.next;
+        }
+      }
+
+      deleteMode(index) {
+        if (index < 1 || index > this.size) {
+          console.log("invalid index");
+          return -1;
+        }
+
+        if (index === 1) {
+          this.head = this.head.next;
+        } else {
+          let counter = 1;
+          let lead = this.head;
+          while (counter < index - 1) {
+            lead = lead.next;
+            counter++;
+          }
+          lead.next = lead.next.next;
+        }
+        this.size--;
+      }
+
+      insertNode(data, index) {
+        if (index < 1 || index > this.size) {
+          console.log("Invalid index");
+          return -1;
+        }
+        let newNode = {
+          value: data,
+          next: null,
+        };
+        if (index === 1) {
+          newNode.next = this.head;
+          this.head = newNode;
+        } else {
+          let counter = 1;
+          let lead = this.head;
+          while (counter < index - 1) {
+            lead = lead.next;
+            counter++;
+          }
+          newNode.next = lead.next;
+          lead.next = newNode;
+        }
+        this.size++;
+      }
+   
+searchNode(data)
+{
+  let result=-1;
+  let lead=this.head;
+  while(lead)
+{
+  if(lead.value===data)
+{
+  result=lead;
+}
+lead=lead.next;
+}
+console.log(result);
+
+}
+
+   
+    }
+
+    let list = new List(100);
+    console.log(list);
+    console.log("After addition");
+    list.addNode(200);
+    list.addNode(300);
+    list.addNode(400);
+    list.addNode(500);
+    list.addNode(600);
+    console.log(list);
+    console.log("Loop------");
+    list.traverse();
+    console.log("After deleting");
+    list.deleteMode(3);
+    console.log(list);
+    console.log("After inserting");
+    list.insertNode(700, 3);
+    console.log(list);
+    console.log("After searching");
+    list.searchNode(700)
+    
+  </script>
+  <body></body>
+</html>
